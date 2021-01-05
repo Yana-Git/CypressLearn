@@ -1,0 +1,14 @@
+{
+  "name": "CypressLearn",
+  "version": "1.0.0",
+  "description": "sample cypress test",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "yao",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^6.2.1"
+  }
+}
