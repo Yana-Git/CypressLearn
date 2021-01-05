@@ -1,13 +1,21 @@
 {
-  "name": "CypressLearn",
+  "name": "cypresslearn",
   "version": "1.0.0",
-  "description": "sample cypress test",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "test"
   },
-  "author": "yao",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yana-Git/CypressLearn.git"
+  },
+  "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yana-Git/CypressLearn/issues"
+  },
+  "homepage": "https://github.com/Yana-Git/CypressLearn#readme",
   "devDependencies": {
     "cypress": "^6.2.1"
   }
