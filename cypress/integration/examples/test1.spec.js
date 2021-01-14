@@ -8,8 +8,8 @@
 //         cy.get('body').should('contain', 'Cypress')
 //     })
 // })
-describe('Test',function(){
-    it('add',function(){
-        expect(15+10).to.equal(25)
-    })
-})
+describe("Test", function () {
+  it("add", function () {
+    expect(15 + 10).to.equal(25);
+  });
+});
