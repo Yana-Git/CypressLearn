@@ -14,6 +14,20 @@ describe("Test2", function () {
     cy.get("button").click();
     cy.get("button").should("not.exist");
   });
+  it.only("failLogin", function () {
+    cy.get("#user-name").clear().type("locked_out_user");
+    cy.get("#password").clear().type("secret_sauce");
+    cy.get("#login-button").click();
+    cy.get("h3").should("contain", "Sorry, this user has been locked out");
+    // cy.get("#user-name").clear().type("problem_user");
+    // cy.get("#password").clear().type("secret_sauce");
+    // cy.get("#login-button").click();
+    // cy.get(".inventory_item_img").first().should("be.visible");
+    cy.get("#user-name").clear().type("performance_glitch_user");
+    cy.get("#password").clear().type("secret_sauce");
+    cy.get("#login-button").click();
+    cy.get("body").should("contain", "Products"); //??????
+  });
   it("failLogin", function () {
     cy.get("#user-name").clear().type("standar_user");
     cy.get("#password").clear().type("secret_sauce");
@@ -26,7 +40,7 @@ describe("Test2", function () {
     cy.get("button").click();
     cy.get("button").should("not.exist");
   });
-  it.only("successLogin", function () {
+  it("successLogin", function () {
     cy.get("#user-name").clear().type("standard_user");
     cy.get("#password").clear().type("secret_sauce");
     cy.get("#login-button").click();
