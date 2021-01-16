@@ -39,7 +39,7 @@ describe("Test2", function () {
     //     cy.get("button").contains("REMOVE").click();
     //     cy.get(".btn_secondary").contains("Continue Shopping").click();
     //   }
-    // });尝试条件测试失败
+    // });尝试条件测试失败。
     cy.get(".inventory_item_name").contains("Sauce Labs Backpack").click();
     cy.url().should("include", "/inventory-item.html?id=4");
     cy.get("button").contains("ADD TO CART").click();
