@@ -33,11 +33,14 @@ describe("Test4", function () {
       .click();
     cy.get("#submit").click();
     cy.get(".modal-content").should("be.visible");
-    cy.get("tbody>tr").eq(0).should("contain", "YY WW");
-    cy.get("tbody>tr").eq(1).should("contain", "yw@gmail.com");
-    cy.get("tbody>tr").eq(2).should("contain", "Female");
-    cy.get("tbody>tr").eq(3).should("contain", "0223232323");
-    cy.get("tbody>tr").eq(9).should("contain", "Haryana Panipat");
+    cy.get("tbody>tr")
+      .eq(0)
+      .should("contain", firstName)
+      .and("contain", lastName);
+    cy.get("tbody>tr").eq(1).should("contain", Email);
+    cy.get("tbody>tr").eq(2).should("contain", Gender);
+    cy.get("tbody>tr").eq(3).should("contain", Mobile);
+    cy.get("tbody>tr").eq(9).should("contain", State).and("contain", City);
     cy.get("#closeLargeModal").click();
     cy.get(".modal-content").should("not.exist");
   });
