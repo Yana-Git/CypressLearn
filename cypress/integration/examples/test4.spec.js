@@ -3,14 +3,14 @@ describe("Test4", function () {
     cy.visit("https://demoqa.com/automation-practice-form");
     cy.fixture("profile.json").as("profile");
   });
-  it("read data", function () {
-    let firstName = this.profile.firstName;
-    let lastName = this.profile.lastName;
-    let Email = this.profile.Email;
-    let Gender = this.profile.Gender;
-    let Mobile = this.profile.Mobile;
-    let State = this.profile.State;
-    let City = this.profile.City;
+  it("readData", function () {
+    const firstName = this.profile.firstName;
+    const lastName = this.profile.lastName;
+    const Email = this.profile.Email;
+    const Gender = this.profile.Gender;
+    const Mobile = this.profile.Mobile;
+    const State = this.profile.State;
+    const City = this.profile.City;
     cy.get("#firstName")
       .clear()
       .type(firstName)
@@ -35,12 +35,13 @@ describe("Test4", function () {
     cy.get(".modal-content").should("be.visible");
     cy.get("tbody>tr")
       .eq(0)
-      .should("contain", firstName)
-      .and("contain", lastName);
+      .should("contain", firstName + " " + lastName);
     cy.get("tbody>tr").eq(1).should("contain", Email);
     cy.get("tbody>tr").eq(2).should("contain", Gender);
     cy.get("tbody>tr").eq(3).should("contain", Mobile);
-    cy.get("tbody>tr").eq(9).should("contain", State).and("contain", City);
+    cy.get("tbody>tr")
+      .eq(9)
+      .should("contain", State + " " + City);
     cy.get("#closeLargeModal").click();
     cy.get(".modal-content").should("not.exist");
   });
