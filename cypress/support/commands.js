@@ -23,3 +23,18 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+Cypress.Commands.add("addToCart", (number) => {
+  for (let i = 2; i < number + 2; i++) {
+    cy.get("button").eq(i).click();
+  }
+  cy.get("#shopping_cart_container").should("contain", number);
+});
+Cypress.Commands.add("clearCart", () => {
+  cy.get("#shopping_cart_container").then(($el) => {
+    const n = $el.text();
+    for (let i = 0; i < n; i++) {
+      cy.get("button").contains("REMOVE").click();
+    }
+    cy.get(".cart_item").should("not.exist");
+  });
+});
