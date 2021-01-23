@@ -5,5 +5,9 @@
     "Gender": "Female",
     "Mobile": "0223232323",
     "State": "Haryana",
-    "City":"Panipat"
+    "City":"Panipat",
+    "streetAddress":"12 ABC Road",
+    "zipCode":"1234"
+
+
   }
