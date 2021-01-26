@@ -52,15 +52,6 @@ describe("Test2", function () {
     cy.xpath('//input[@id="login-button"]').click();
     cy.get("body").should("contain", "Products");
     cy.get(".inventory_item").should("have.length", 6);
-    // cy.get(".shopping_cart_link.fa-layers.fa-fw").then(($el) => {
-    //   if (
-    //     $el.find("fa-layers-conter.shopping_cart_badge").contents("1").length
-    //   ) {
-    //     cy.get("#shopping_cart_container").click();
-    //     cy.get("button").contains("REMOVE").click();
-    //     cy.get(".btn_secondary").contains("Continue Shopping").click();
-    //   }
-    // });
     // cy.get(".inventory_item_name").contains("Sauce Labs Backpack").click();
     // cy.url().should("include", "/inventory-item.html?id=4");
     // cy.get("button").contains("ADD TO CART").click();
@@ -89,8 +80,10 @@ describe("Test2", function () {
     // cy.get(".btn_action.cart_button").contains("FINISH").click();
     // cy.url().should("include", "/checkout-complete");
     // cy.get("body").should("contain", "THANK YOU FOR YOUR ORDER");
-    cy.addToCart(5);
-    cy.get("#shopping_cart_container").click();
-    cy.clearCart();
+
+    cy.get("button").eq(2).click();
+    //cy.addToCart(5);
+    //cy.get("#shopping_cart_container").click();
+    //cy.clearCart();
   });
 });

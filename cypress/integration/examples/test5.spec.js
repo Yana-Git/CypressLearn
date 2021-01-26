@@ -1,5 +1,5 @@
 describe("Hooks", () => {
-  before(() => {
+  before(function () {
     cy.visit("http://a.testaddressbook.com/sign_in");
     cy.get("#session_email").clear().type("yaowang274@gmail.com");
     cy.get("#session_password").clear().type("wangsong");
@@ -44,9 +44,21 @@ describe("Hooks", () => {
     );
   });
 
-  afterEach(() => {
+  afterEach(function () {
+    cy.fixture("profile.json").as("profile");
+    const firstName = this.profile.firstName;
+    //     cy.get('@profile').then((profile)=>{
+    //       const firstName = this.profile.firstName;
+    // })
     cy.get(".nav-item.nav-link").contains("Addresses").click();
-    cy.get("td").last().contains("Destroy").click();
+    cy.get(".table")
+      .find("tbody>tr")
+      .contains(firstName)
+      .closest("tr")
+      .find("td")
+      .find("a")
+      .contains("Destroy")
+      .click();
     cy.get(".alert-notice").should(
       "contain",
       "Address was successfully destroyed."
@@ -55,6 +67,6 @@ describe("Hooks", () => {
 
   after(() => {
     cy.get("a").contains("Sign out").click();
-    cy.get("#clearance").should("be.visible");
+    cy.get("h2").should("contain", "Sign in");
   });
 });

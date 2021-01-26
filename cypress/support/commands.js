@@ -31,8 +31,8 @@ Cypress.Commands.add("addToCart", (number) => {
 });
 Cypress.Commands.add("clearCart", () => {
   cy.get("#shopping_cart_container").then(($el) => {
-    const n = $el.text();
-    for (let i = 0; i < n; i++) {
+    const qty = $el.text();
+    for (let i = 0; i < qty; i++) {
       cy.get("button").contains("REMOVE").click();
     }
     cy.get(".cart_item").should("not.exist");
