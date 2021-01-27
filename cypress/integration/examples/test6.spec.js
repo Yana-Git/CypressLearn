@@ -1,14 +1,5 @@
 describe("Test6", function () {
   before(function () {
-    cy.request({
-      url: "https://docket-test.herokuapp.com/api/Todo/",
-      headers: {
-        token: "a3c0c87d-0ded-49cf-b219-38f5e8223239",
-      },
-    }).then((response) => {
-      expect(response.status).equal(200);
-    });
-
     cy.visit("https://docket-test.herokuapp.com/");
     cy.get("a").contains("Login").click();
     cy.get("#username").clear().type("yana");
@@ -26,13 +17,11 @@ describe("Test6", function () {
     });
   });
   it("addTodo", function () {
-    // cy.get("#todoInput").clear().type("walk dog");
-    // cy.get("button").contains("Add todo").click();
     cy.request({
       method: "POST",
       url: "https://docket-test.herokuapp.com/api/Todo/",
       headers: {
-        token: "a3c0c87d-0ded-49cf-b219-38f5e8223239",
+        token: "908784af-4dc3-4f2e-884f-cb12b12daa6e",
       },
       body: {
         Body: "Walk cat",
@@ -40,19 +29,23 @@ describe("Test6", function () {
     }).then((response) => {
       expect(response.status).equal(200);
     });
+
     cy.request({
       method: "POST",
       url: "https://docket-test.herokuapp.com/api/Todo/",
       headers: {
-        token: "a3c0c87d-0ded-49cf-b219-38f5e8223239",
+        token: "908784af-4dc3-4f2e-884f-cb12b12daa6e",
       },
       body: {
         Body: "Walk dog",
       },
     }).then((response) => {
       expect(response.status).equal(200);
+      expect(response.body).to.have.length(6);
     });
 
+    // cy.get("#todoInput").clear().type("walk dog");
+    // cy.get("button").contains("Add todo").click();
     // cy.get(".list-group-item").should("have.length", 1);
     // cy.get("#todoItem").should("contain", "walk dog");
     // cy.get("#todoInput").clear().type("go shopping");
@@ -66,12 +59,14 @@ describe("Test6", function () {
       method: "DELETE",
       url: "https://docket-test.herokuapp.com/api/Todo/2",
       headers: {
-        token: "a3c0c87d-0ded-49cf-b219-38f5e8223239",
+        token: "908784af-4dc3-4f2e-884f-cb12b12daa6e",
+      },
+      body: {
+        Body: "Walk dog",
       },
     })
       .its("status")
       .should("be.ok");
-
     // cy.get(".list-group")
     //   .find(".list-group-item")
     //   .find("#todoItem")
