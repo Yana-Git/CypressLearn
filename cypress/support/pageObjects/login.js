@@ -4,13 +4,16 @@ export class LoginPage {
   }
 
   loginInfo(username, password) {
-    cy.get("#user-name", { log: false })
-      .clear()
-      .type(`${username}{enter}`, { log: false });
-    cy.get("#password", { log: false })
-      .clear()
-      .type(`${password}{enter}`, { log: false });
-    cy.get("body").should("contain", "Products");
+    //cy.get("#user-name").clear().type(`${username}{enter}`);
+    cy.get("[data-test='username']").then(($input) => {
+      $input.val(username);
+    });
+    cy.get("[data-test='password']").then(($input) => {
+      $input.val(password);
+    });
+    cy.get("#login-button").click();
+    // cy.get("#password").clear().type(`${password}{enter}`);
+    //cy.get("body").should("contain", "Products");
   }
 }
 
