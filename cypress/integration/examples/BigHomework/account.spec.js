@@ -1,3 +1,4 @@
+const path = require("path");
 describe("account function", function () {
   beforeEach("go to the website", function () {
     cy.visit("http://automationpractice.com/index.php");
@@ -61,7 +62,22 @@ describe("account function", function () {
     //////status
     cy.get(":nth-child(1) > .history_state").contains("On backorder");
 
-    //////invoice////失败expected undefined to equal 200
+    //////invoice方法一成功
+
+    const downloadsFolder = "cypress/downloads";
+    const validatePDFFile = () => {
+      const downloadedFilename = path.join(downloadsFolder, "IN054845.pdf");
+
+      cy.readFile(downloadedFilename).should((pdf) => {
+        expect(pdf).include("pdf");
+      });
+    };
+    cy.get(":nth-child(1) > .history_link > .footable-toggle").click();
+    cy.get(
+      ":nth-child(2) > .footable-row-detail-cell > .footable-row-detail-inner > :nth-child(2) > .footable-row-detail-value > .link-button"
+    ).click();
+    validatePDFFile();
+    ////方法二失败expected undefined to equal 200
     // cy.get(":nth-child(1) > .history_link > .footable-toggle").click();
     // cy.intercept(
     //   "get",
@@ -75,10 +91,12 @@ describe("account function", function () {
     // });
 
     //////details
-    cy.get(":nth-child(1) > .history_link > .footable-toggle").click();
+
+    cy.get(".item.alternate_item > .history_link > .footable-toggle").click();
     cy.get(
       ":nth-child(2) > .footable-row-detail-cell > .footable-row-detail-inner > :nth-child(3) > .footable-row-detail-value > .link-button"
     ).click();
+
     cy.url().should("include", "controller=order");
   });
 });
