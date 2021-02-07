@@ -64,31 +64,31 @@ describe("account function", function () {
 
     //////invoice方法一成功
 
-    const downloadsFolder = "cypress/downloads";
-    const validatePDFFile = () => {
-      const downloadedFilename = path.join(downloadsFolder, "IN054845.pdf");
+    // const downloadsFolder = "cypress/downloads";
+    // const validatePDFFile = () => {
+    //   const downloadedFilename = path.join(downloadsFolder, "IN054845.pdf");
 
-      cy.readFile(downloadedFilename).should((pdf) => {
-        expect(pdf).include("pdf");
-      });
-    };
-    cy.get(":nth-child(1) > .history_link > .footable-toggle").click();
-    cy.get(
-      ":nth-child(2) > .footable-row-detail-cell > .footable-row-detail-inner > :nth-child(2) > .footable-row-detail-value > .link-button"
-    ).click();
-    validatePDFFile();
-    ////方法二失败expected undefined to equal 200
+    //   cy.readFile(downloadedFilename).should((pdf) => {
+    //     expect(pdf).include("pdf");
+    //   });
+    // };
     // cy.get(":nth-child(1) > .history_link > .footable-toggle").click();
-    // cy.intercept(
-    //   "get",
-    //   "http://automationpractice.com/index.php?controller=pdf-invoice&id_order=282854"
-    // ).as("PdfFile");
     // cy.get(
     //   ":nth-child(2) > .footable-row-detail-cell > .footable-row-detail-inner > :nth-child(2) > .footable-row-detail-value > .link-button"
     // ).click();
-    // cy.wait("@PdfFile").should((response) => {
-    //   expect(response.status).equal(200);
-    // });
+    // validatePDFFile();
+    ////方法二失败expected undefined to equal 200
+    cy.get(":nth-child(1) > .history_link > .footable-toggle").click();
+    cy.intercept(
+      "get",
+      "http://automationpractice.com/index.php?controller=pdf-invoice&id_order=282854"
+    ).as("PdfFile");
+    cy.get(
+      ":nth-child(2) > .footable-row-detail-cell > .footable-row-detail-inner > :nth-child(2) > .footable-row-detail-value > .link-button"
+    ).click();
+    cy.wait("@PdfFile").should((response) => {
+      expect(response.status).equal(200);
+    });
 
     //////details
 
