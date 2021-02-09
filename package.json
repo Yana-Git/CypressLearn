@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Yana-Git/CypressLearn#readme",
   "devDependencies": {
     "cypress": "^6.4.0",
+    "cypress-iframe": "^1.0.1",
     "cypress-xpath": "^1.6.1"
   }
 }

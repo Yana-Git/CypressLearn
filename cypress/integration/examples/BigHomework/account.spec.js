@@ -14,18 +14,7 @@ describe("account function", function () {
     cy.get("tbody>tr").should("have.length", 4);
 
     //////order reference
-    cy.get(".first_item > .history_link").click();
-    cy.get(":nth-child(2) > .footable-row-detail-cell").should("be.visible");
-    cy.get(".first_item > .history_link").click();
-    cy.get(":nth-child(2) > .footable-row-detail-cell").should(
-      "not.be.visible"
-    );
-    cy.get(".first_item > .history_link > .footable-toggle").click();
-    cy.get(":nth-child(2) > .footable-row-detail-cell").should("be.visible");
-    cy.get(".first_item > .history_link > .footable-toggle").click();
-    cy.get(":nth-child(2) > .footable-row-detail-cell").should(
-      "not.be.visible"
-    );
+
     cy.get(".first_item > .history_link > .color-myaccount").click();
     cy.get(".dark > strong").should(
       "contain",
@@ -53,7 +42,7 @@ describe("account function", function () {
 
     //////total price
     cy.get('#order-list > thead > tr > [data-hide="phone"]').click();
-    cy.get("tbody").find("tr").eq(4).contains("55");
+    cy.get("tbody").find("tr").eq(3).contains("55");
     cy.get("tbody").find("tr").eq(0).contains("18.51");
     cy.get('#order-list > thead > tr > [data-hide="phone"]').click();
     cy.get("tbody").find("tr").eq(0).contains("55");
@@ -64,39 +53,35 @@ describe("account function", function () {
 
     //////invoice方法一成功
 
-    // const downloadsFolder = "cypress/downloads";
-    // const validatePDFFile = () => {
-    //   const downloadedFilename = path.join(downloadsFolder, "IN054845.pdf");
+    const downloadsFolder = "cypress/downloads";
+    const validatePDFFile = () => {
+      const downloadedFilename = path.join(downloadsFolder, "IN054845.pdf");
 
-    //   cy.readFile(downloadedFilename).should((pdf) => {
-    //     expect(pdf).include("pdf");
-    //   });
-    // };
+      cy.readFile(downloadedFilename).should((pdf) => {
+        expect(pdf).include("pdf");
+      });
+    };
+    cy.get(":nth-child(1) > .history_invoice > .link-button").click();
+    validatePDFFile();
+    ////方法二失败expected undefined to equal 200
     // cy.get(":nth-child(1) > .history_link > .footable-toggle").click();
+    // cy.intercept(
+    //   "get",
+    //   "http://automationpractice.com/index.php?controller=pdf-invoice&id_order=282854"
+    // ).as("PdfFile");
     // cy.get(
     //   ":nth-child(2) > .footable-row-detail-cell > .footable-row-detail-inner > :nth-child(2) > .footable-row-detail-value > .link-button"
     // ).click();
-    // validatePDFFile();
-    ////方法二失败expected undefined to equal 200
-    cy.get(":nth-child(1) > .history_link > .footable-toggle").click();
-    cy.intercept(
-      "get",
-      "http://automationpractice.com/index.php?controller=pdf-invoice&id_order=282854"
-    ).as("PdfFile");
-    cy.get(
-      ":nth-child(2) > .footable-row-detail-cell > .footable-row-detail-inner > :nth-child(2) > .footable-row-detail-value > .link-button"
-    ).click();
-    cy.wait("@PdfFile").should((response) => {
-      expect(response.status).equal(200);
-    });
+    // cy.wait("@PdfFile").should((response) => {
+    //   expect(response.status).equal(200);
+    // });
 
     //////details
 
-    cy.get(".item.alternate_item > .history_link > .footable-toggle").click();
-    cy.get(
-      ":nth-child(2) > .footable-row-detail-cell > .footable-row-detail-inner > :nth-child(3) > .footable-row-detail-value > .link-button"
-    ).click();
-
-    cy.url().should("include", "controller=order");
+    cy.get(":nth-child(1) > .history_detail > .btn > span").click();
+    cy.get(".dark > strong").should(
+      "contain",
+      "Order Reference MTGMSMFNO -- placed on 02/02/2021"
+    );
   });
 });

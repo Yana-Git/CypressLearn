@@ -23,6 +23,7 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+import "cypress-iframe";
 Cypress.Commands.add("addToCart", (number) => {
   for (let i = 2; i < number + 2; i++) {
     cy.get("button").eq(i).click();
